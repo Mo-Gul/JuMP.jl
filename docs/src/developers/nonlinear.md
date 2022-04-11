@@ -112,13 +112,13 @@ Delete a constraint using [`Nonlinear.delete`](@ref):
 julia> Nonlinear.delete(data, c2)
 ```
 
-## User-defined operators
+### User-defined operators
 
 By default, `Nonlinear` supports a wide range of univariate and multivariate
 operators. However, you can also define your own operators by _registering_
 them.
 
-### Univariate operators
+#### Univariate operators
 
 Register a univariate user-defined operator using
 [`Nonlinear.register_operator`](@ref):
@@ -150,7 +150,7 @@ f′′ (generic function with 1 method)
 julia> Nonlinear.register_operator(data, :my_f3, 1, f, f′, f′′)
 ```
 
-### Multivariate operators
+#### Multivariate operators
 
 Register a multivariate user-defined operator using
 [`Nonlinear.register_operator`](@ref):
@@ -179,7 +179,7 @@ julia> function ∇g(ret, x...)
 julia> Nonlinear.register_operator(data, :my_g2, 2, g, ∇g)
 ```
 
-## [MathOptInterface](@id Nonlinear_MOI_interface)
+### [MathOptInterface](@id Nonlinear_MOI_interface)
 
 `Nonlinear` implements the MathOptInterface API to allow solvers to query the
 function and derivative information of our nonlinear model `data`. However,
@@ -255,4 +255,6 @@ julia> MOI.eval_objective_gradient(data, grad, x)
 julia> grad
 1-element Vector{Float64}:
  1.909297426825682
- ```
+```
+
+## NonlinearExpression

@@ -438,11 +438,15 @@ function eval_multivariate_function(
     x::AbstractVector{T},
 )::T where {T}
     if op == :+
-        return +(x...)
+        return sum(x)
     elseif op == :-
-        return -(x...)
+        ret = x[1]
+        for i in 2:length(x)
+            ret -= x[i]
+        end
+        return ret
     elseif op == :*
-        return *(x...)
+        return prod(x)
     elseif op == :^
         @assert length(x) == 2
         return x[1]^x[2]
@@ -474,7 +478,7 @@ function eval_multivariate_gradient(
         fill!(g, -one(T))
         g[1] = one(T)
     elseif op == :*
-        total = *(x...)
+        total = prod(x)
         if total == zero(T)
             for i in 1:length(x)
                 g[i] = prod(x[j] for j in 1:length(x) if i != j)
